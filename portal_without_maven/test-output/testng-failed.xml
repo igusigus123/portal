@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
+<suite name="Failed suite [Suite]" guice-stage="DEVELOPMENT">
+  <parameter name="environment" value="stt"/>
+  <test thread-count="5" name="TestClearAgreement(failed)">
+    <classes>
+      <class name="analyzer.ClearAgreement">
+        <methods>
+          <include name="initialize"/>
+          <include name="clear"/>
+        </methods>
+      </class> <!-- analyzer.ClearAgreement -->
+    </classes>
+  </test> <!-- TestClearAgreement(failed) -->
+  <test thread-count="5" name="TestLogin(failed)">
+    <classes>
+      <class name="login.LoginTest">
+        <methods>
+          <include name="initialize"/>
+          <include name="Login"/>
+        </methods>
+      </class> <!-- login.LoginTest -->
+    </classes>
+  </test> <!-- TestLogin(failed) -->
+  <test thread-count="5" name="TestConsumerAnalyzer(failed)">
+    <classes>
+      <class name="analyzer.ConsumerAnalyzerTest">
+        <methods>
+          <include name="aa_wasCalculationBefore"/>
+          <include name="ba_CreditAmount"/>
+          <include name="ab_TypeCredit"/>
+          <include name="initialize"/>
+          <include name="aa_Zaloguj"/>
+        </methods>
+      </class> <!-- analyzer.ConsumerAnalyzerTest -->
+    </classes>
+  </test> <!-- TestConsumerAnalyzer(failed) -->
+  <test thread-count="5" name="TestMortgageAnalyzerAlone(failed)">
+    <classes>
+      <class name="analyzer.MortgageAnalyzerTestAlone">
+        <methods>
+          <include name="aa_wasCalculationBefore"/>
+          <include name="cf_legalCharges"/>
+          <include name="ba_PropertyValue"/>
+          <include name="ch_creditLimits"/>
+          <include name="cb_verifyTooltips"/>
+          <include name="be_relationAmountInstallments"/>
+          <include name="initialize"/>
+          <include name="bb_CreditAmount"/>
+          <include name="ca_component"/>
+          <include name="cb_backButton"/>
+          <include name="dc_summarySeeMoreLess"/>
+          <include name="cg_payedInstallments"/>
+          <include name="bd_InstalltmentsValue"/>
+          <include name="aa_Zaloguj"/>
+          <include name="ck_whyAsk"/>
+          <include name="cl_count"/>
+          <include name="ce_MonthIncome"/>
+          <include name="cd_sourceOfIncome"/>
+          <include name="bg_submit"/>
+          <include name="db_summaryCreditCriteriaSummary"/>
+          <include name="ab_TypeCredit"/>
+          <include name="bf_verifyTooltips"/>
+          <include name="da_summaryVerifyTooltips"/>
+          <include name="cc_creditTaker"/>
+          <include name="dd_summaryRemain"/>
+          <include name="bba_checkboxSelected"/>
+          <include name="bc_InstalltmentsCount"/>
+          <include name="cj_houeseholdExpenses"/>
+          <include name="ci_dependents"/>
+        </methods>
+      </class> <!-- analyzer.MortgageAnalyzerTestAlone -->
+    </classes>
+  </test> <!-- TestMortgageAnalyzerAlone(failed) -->
+  <test thread-count="5" name="TestMortgageAnalyzerWithCotaker(failed)">
+    <classes>
+      <class name="analyzer.MortgageAnalyzerTestWithCotaker">
+        <methods>
+          <include name="aa_wasCalculationBefore"/>
+          <include name="cb_verifyTooltips"/>
+          <include name="ba_PropertyValue"/>
+          <include name="bd_InstalltmentsValue"/>
+          <include name="cg_creditLimits"/>
+          <include name="bb_CreditAmount"/>
+          <include name="be_relationAmountInstallments"/>
+          <include name="cb_backButton"/>
+          <include name="ca_component"/>
+          <include name="dc_summarySeeMoreLess"/>
+          <include name="aa_Zaloguj"/>
+          <include name="cd_sourceOfIncome2"/>
+          <include name="initialize"/>
+          <include name="cf_legalCharges2"/>
+          <include name="db_summaryCreditCriteriaSummary"/>
+          <include name="cd_sourceOfIncome"/>
+          <include name="ce_MonthIncome2"/>
+          <include name="cl_count"/>
+          <include name="bf_verifyTooltips"/>
+          <include name="ck_whyAsk"/>
+          <include name="ab_TypeCredit"/>
+          <include name="da_summaryVerifyTooltips"/>
+          <include name="cc_creditTaker"/>
+          <include name="dd_summaryRemain"/>
+          <include name="bc_InstalltmentsCount"/>
+          <include name="cf_payedInstallments"/>
+          <include name="cg_payedInstallments2"/>
+          <include name="bba_checkboxSelected"/>
+          <include name="cj_houeseholdExpenses"/>
+          <include name="bg_submit"/>
+          <include name="ch_creditLimits2"/>
+          <include name="ci_dependents"/>
+        </methods>
+      </class> <!-- analyzer.MortgageAnalyzerTestWithCotaker -->
+    </classes>
+  </test> <!-- TestMortgageAnalyzerWithCotaker(failed) -->
+</suite> <!-- Failed suite [Suite] -->

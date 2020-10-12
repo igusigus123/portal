@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
+<suite name="Failed suite [Default suite]" guice-stage="DEVELOPMENT">
+  <test thread-count="5" name="Default test(failed)">
+    <classes>
+      <class name="analyzer.MortgageAnalyzerTestWithCotaker">
+        <methods>
+          <include name="aa_wasCalculationBefore"/>
+          <include name="cd_sourceOfIncome"/>
+          <include name="cb_verifyTooltips"/>
+          <include name="ba_PropertyValue"/>
+          <include name="bd_InstalltmentsValue"/>
+          <include name="ce_MonthIncome2"/>
+          <include name="bb_CreditAmount"/>
+          <include name="bf_verifyTooltips"/>
+          <include name="ab_TypeCredit"/>
+          <include name="be_relationAmountInstallments"/>
+          <include name="cc_creditTaker"/>
+          <include name="cb_backButton"/>
+          <include name="bc_InstalltmentsCount"/>
+          <include name="ca_component"/>
+          <include name="bba_checkboxSelected"/>
+          <include name="aa_Zaloguj"/>
+          <include name="bg_submit"/>
+          <include name="cd_sourceOfIncome2"/>
+          <include name="initialize"/>
+          <include name="cf_legalCharges2"/>
+        </methods>
+      </class> <!-- analyzer.MortgageAnalyzerTestWithCotaker -->
+    </classes>
+  </test> <!-- Default test(failed) -->
+</suite> <!-- Failed suite [Default suite] -->

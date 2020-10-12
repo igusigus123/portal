@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
+<suite name="Suite">
+ <parameter name="environment" value="prod" />
+ <!-- <test name="TestClearAgreement" thread-count="5">
+		<classes>
+			<class name="analyzer.ClearAgreement">
+			</class>
+		</classes>
+	</test>
+ <test name="TestLogin" thread-count="5">
+		<classes>
+			<class name="login.LoginTest">
+			</class>
+		</classes>
+	</test> -->
+<test name="TestConsumerAnalyzer" thread-count="5">
+		<classes>
+			<class name="analyzer.ConsumerAnalyzerTest" />
+		</classes>
+	</test>
+<!-- <test name="TestMortgageAnalyzerAlone" thread-count="5">
+		<classes>
+			<class name="analyzer.MortgageAnalyzerTestAlone" />
+		</classes>
+	</test>
+	<test name="TestMortgageAnalyzerWithCotaker" thread-count="5">
+		<classes>
+			<class name="analyzer.MortgageAnalyzerTestWithCotaker" />
+		</classes>
+	</test> -->
+</suite> <!-- Suite -->
