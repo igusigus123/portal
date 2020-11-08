@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
+<suite name="Suite">
+	<parameter name="environment" value="prod" />
+	<test thread-count="5" name="ClearAgreement1">
+		<classes>
+			<class name="analyzer.ClearAgreement" />
+		</classes>
+	</test>
+	<test thread-count="5" name="ConsumerCreditPage1">
+		<classes>
+			<class name="analyzer.consumer_credit.Page1Test" />
+		</classes>
+	</test>
+	<test thread-count="5" name="ConsumerCreditPage2">
+		<classes>
+			<class name="analyzer.consumer_credit.Page2Test" />
+		</classes>
+	</test>
+	<test thread-count="5" name="ClearAgreement2">
+		<classes>
+			<class name="analyzer.ClearAgreement" />
+		</classes>
+	</test>
+	<test thread-count="5" name="ConsumerCreditPage3">
+		<classes>
+			<class name="analyzer.consumer_credit.Page3Test" />
+		</classes>
+	</test>
+	<test thread-count="5" name="ClearAgreement3">
+		<classes>
+			<class name="analyzer.ClearAgreement" />
+		</classes>
+	</test>
+	<test thread-count="5" name="ConsumerCreditPage4">
+		<classes>
+			<class name="analyzer.consumer_credit.Page4Test" />
+		</classes>
+	</test>
+</suite>

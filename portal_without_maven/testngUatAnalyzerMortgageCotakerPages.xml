@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
+<suite name="Suite">
+<parameter name="environment" value="prod" />
+<test thread-count="5" name="MortgageCreditPage1">
+   <classes>
+      <class name="analyzer.mortgage_credit.Page1Test"/>
+    </classes>
+  </test>
+  <test thread-count="5" name="MortgageCreditPage2">
+    <classes>
+      <class name="analyzer.mortgage_credit.Page2Test"/>
+    </classes>
+  </test>
+<test thread-count="5" name="MortgageCreditPage3">
+   <classes>
+      <class name="analyzer.mortgage_credit.Page3CreditCotakerTest"/>
+    </classes>
+</test>
+  <test thread-count="5" name="MortgageCreditPage4">
+   <classes>
+      <class name="analyzer.mortgage_credit.Page4CreditCotakerTest"/>
+    </classes>
+  </test>
+</suite> <!-- Suite -->
