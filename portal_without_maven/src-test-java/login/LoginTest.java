@@ -5,8 +5,11 @@ import java.io.IOException;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 import org.testng.Reporter;
+import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
@@ -21,12 +24,18 @@ public class LoginTest extends Base {
 	private Component com;
 	private Base base;
 	private char[] peselNumber;
-	
-	
+	private String email;
+	private String pass;
+	private String pesel;
+	private String badMail;
+	private String badPass;
+	private String environment;
+	private String badPesel;
+	private WebDriverWait w;
+		
 	@Parameters({"environment"})
 	@BeforeTest
 	public void initialize(String param) throws IOException, InterruptedException {
-		//Assert.assertTrue(!com.getEnvironment().isEmpty());
 		if(param.equals("uat")) {
 			com.setEnvironment("uat");
 		}
@@ -39,76 +48,94 @@ public class LoginTest extends Base {
 		driver = initializeDriver("Logowanie");
 		signIn = new SignInObjects(driver);
 		signIn.CookiesComunnicateClose().click();
+		
+		email = base.email;
+		pass = base.pass;
+		pesel = base.pesel;
+		badPass = "badPass";
+		environment = com.getEnvironment();
 
 	}
 
 	@Test
-	public void Login() throws InterruptedException {
-		String email = base.email;
-		String pass = base.pass;
-		String pesel = base.pesel;
-		String badMail = "test@test.pl";
-		String badPass = "badPass";
-		String environment = com.getEnvironment();
-		String badPesel = "12345678901";
-		
+	public void a_EmptyMail() throws InterruptedException {		
 		signIn.Submit().click();
-		Assert.assertTrue((signIn.Email().getAttribute("class").contains("invalid validate")),
-				"Email is not marked like an invalid validate");
+		Assert.assertTrue((signIn.Email().getAttribute("class").contains("invalid validate"))); 
+		}
+	
+	@Test
+	public void b_EmptyPass() throws InterruptedException {	
 
-		signIn.Email().sendKeys(badMail);
+		signIn.Email().sendKeys(email);
 		signIn.Submit().click();
-		
-		Assert.assertTrue((signIn.Password().getAttribute("class").contains("validate")),
-				"Email is not marked like an invalid validate");
-		//System.out.println("1");
+		Assert.assertTrue((signIn.Password().getAttribute("class").contains("validate")));
+	}
+	
+	@Test
+	public void c_BlindEye() throws InterruptedException {	
 		signIn.Password().sendKeys(badPass);
-		//System.out.println("2");
 		Actions actions = new Actions(driver);
 		actions.moveToElement(signIn.blindEye());
-		//System.out.println("3");
 		actions.clickAndHold().perform();
-		//System.out.println("4");
-		Assert.assertTrue(signIn.Password().getAttribute("type").equals("text"),
-				"Password is not visible after click on a blind eye icon");
-		//System.out.println("5");
-		signIn.blindEye().click();
-		//System.out.println("6");                                                                                                                              
+		Assert.assertTrue(signIn.Password().getAttribute("type").equals("text"));
+		signIn.blindEye().click();                     
+	}
+	
+	@Test
+	public void d_hasPeselActiveNumbers() throws InterruptedException {
+		Assert.assertTrue(signIn.FirstActivePeselNumber().isDisplayed());
+	}
+	
+	@Test
+	public void e_EmptyPesel() throws InterruptedException {	
 		signIn.Submit().click();
-		//System.out.println("7");
-		Thread.sleep(5000);
 		if(environment.equals("prod") || environment.equals("stt"))
 		{
-			Assert.assertTrue(signIn.BoxPesel().getAttribute("class").contains("validate"),
-					"Pessel numbers are not marked like an invalid validate");
-			PeselNumbers(badPesel);
+			//Pesel numbers becomes red, when values are empty
+			Assert.assertTrue(signIn.BoxPesel().getAttribute("class").contains("validate"));
 		}
-		signIn.Submit().click();
-		//System.out.println("10");                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         
-		Assert.assertTrue(signIn.isImproperValidText(), "Improper login data text is not visible");
-		//second try
-		signIn.Email().clear();
-		signIn.Email().sendKeys(email);
+	}
+	
+	@Test
+	public void f_ImproperData() throws InterruptedException {
+		if(environment.equals("prod") || environment.equals("stt"))
+			PeselNumbers(pesel);
+		signIn.Submit().click();             
+		Assert.assertTrue(signIn.improperValidText().isDisplayed());
+	}
+	
+	@Test
+	public void g_properData() throws InterruptedException {
 		signIn.Password().clear();
 		signIn.Password().sendKeys(pass);
-		Thread.sleep(5000);
 		if(environment.equals("prod") || environment.equals("stt"))
 			PeselNumbers(pesel);
 		signIn.Submit().click();
-		if(signIn.isElementPresent())
-		{
+		//check if previous customer session is open
+		try {
+			signIn.closeAnotherSessionCheckbox();
 			signIn.closeAnotherSessionCheckbox().click();
 			signIn.Submit().click();
+			signIn.ProfileSubmit().click();
 		}
+		catch(Exception e) {
+			signIn.ProfileSubmit().click();
+		}
+				
+	}
+	
+	@AfterTest
+	public void Report() {
 		Reporter.log("User PESEL: "+ pesel);
 		driver.close();
-		
-		
 	}
 	
 	public void PeselNumbers(String pesel) {
 		WebElement[] tab = signIn.getActivePeselNumbers();
-		peselNumber = Pesel(pesel);
+		peselNumber = new char[11];
+		for (int i = 0; i < 11; i++) {
+			peselNumber[i] = pesel.charAt(i);
+		}
 		for (int i = 0; i < 11; i++) {
 			if (tab[i] == null) {
 				continue;
@@ -118,13 +145,5 @@ public class LoginTest extends Base {
 				tab[i].sendKeys(peselI);
 			}
 		}
-	}
-	
-	public char[] Pesel(String pesel) {
-		peselNumber = new char[11];
-		for (int i = 0; i < 11; i++) {
-			peselNumber[i] = pesel.charAt(i);
-		}
-		return peselNumber;
 	}
 }

@@ -3,6 +3,7 @@ package analyzer;
 import java.io.IOException;
 
 import org.openqa.selenium.WebElement;
+import org.testng.Assert;
 import org.testng.Reporter;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Parameters;
@@ -33,29 +34,48 @@ public class ClearAgreement extends Base {
 	}
 
 	@Test
-	public void clear() throws Exception {
+	public void a_IsCustomerExist() {
 		bo.customerFileBox().click();
 		bo.customerSearch().click();
 		WebElement peselBox = bo.peselBox();
 		peselBox.sendKeys(base.pesel);
 		bo.searchButton().click();
-		if (bo.IsPresentCustomerFile()) {
-			bo.customerFile().click();
-			bo.agreements().click();
-			if (bo.IsPresentwithdrawButton()) {
-				//System.out.println(bo.withdrawButton().getAttribute("disabled"));
-				if (bo.IsDesabledwithdrawButton()) {
-					Reporter.log("Zgoda zosta³a ju¿ wczeœniej wycofana");
-				} else {
-					bo.withdrawButton().click();
-					Thread.sleep(2000);
-					Reporter.log("Zgoda na analizator zosta³a wycofana");
-				}
-
-			} else
-				Reporter.log("Zgoda na analizator nie zosta³a udzielona");
-		} else
-			Reporter.log("Nie wyszukano kartoteki dla pesel: " + base.pesel);
-		driver.close();
+		Assert.assertTrue(bo.customerFile().isDisplayed(), "Nie wyszukano kartoteki dla pesel: " + base.pesel);
+	}
+	
+	@Test
+	public void b_Clear() throws Exception {
+		bo.customerFile().click();
+		bo.agreements().click();
+		if(NoAgreement()) {
+			if(ButtonClickable())
+			{
+				bo.withdrawButton().click();
+				Assert.assertTrue(bo.WithdrawButtonNoClickable().isDisplayed());
+			}
+		}
+		
+		
+	}
+	
+	public boolean NoAgreement() {
+		try {
+			bo.withdrawButton().isDisplayed();
+			return true;
+		}
+		catch(Exception e) {
+			return false;
+		}
+	}
+	
+	public boolean ButtonClickable() {
+		try {
+			bo.WithdrawButtonNoClickable().isDisplayed();
+			return false;
+		}
+		catch(Exception e) {
+			return true;
+		}
 	}
 }
+

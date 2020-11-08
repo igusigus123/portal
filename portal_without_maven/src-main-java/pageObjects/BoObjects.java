@@ -19,7 +19,7 @@ public class BoObjects {
 	public BoObjects(WebDriver driver) {
 		this.driver = driver;
 		PageFactory.initElements(driver, this);
-		w = new WebDriverWait(driver, 120);
+		w = new WebDriverWait(driver, 5);
 	}
 
 	//
@@ -63,20 +63,6 @@ public class BoObjects {
 		return customerFile;
 	}
 	
-	@FindBy(xpath = "//div[@class='col-md-3']//a")
-	private WebElement IsPresentCustomerFile;
-
-	public boolean IsPresentCustomerFile() throws Exception {
-		boolean b = true;
-		try {
-			w.until(ExpectedConditions.visibilityOf(IsPresentCustomerFile));
-		} catch (org.openqa.selenium.NoSuchElementException e) {
-			// TODO Auto-generated catch block
-			b = false;
-		}
-		return b;
-	}
-	
 	@FindBy(xpath = "//a[contains(@href, 'agreements')]")
 	private WebElement agreements;
 
@@ -93,29 +79,12 @@ public class BoObjects {
 		return withdrawButton;
 	}
 	
-	@FindBy(xpath = "//a[contains(text(),'Warunki i zasady')]/ancestor::div[@class='panel-body']//span[contains(text(),'Wycofaj')]")
-	private WebElement IsPresentwithdrawButton;
+	@FindBy(xpath = "//a[contains(text(),'Warunki i zasady')]/ancestor::div[@class='panel-body']//span[contains(text(),'Wycofaj') and @disabled='disabled']")
+	private WebElement WithdrawButtonNoClickable;
 
-	public boolean IsPresentwithdrawButton() throws Exception {
-		boolean b = true;
-		try {
-			w.until(ExpectedConditions.visibilityOf(IsPresentwithdrawButton));
-		} catch (org.openqa.selenium.NoSuchElementException e) {
-			// TODO Auto-generated catch block
-			b = false;
-		}
-		return b;
-	}
-	
-	public boolean IsDesabledwithdrawButton() throws Exception {
-		boolean b = true;
-		try {
-			driver.findElement(By.xpath("//a[contains(text(),'Warunki i zasady')]/ancestor::div[@class='panel-body']//span[contains(text(),'Wycofaj') and @disabled='disabled']"));
-		} catch (org.openqa.selenium.NoSuchElementException e) {
-			// TODO Auto-generated catch block
-			b = false;
-		}
-		return b;
+	public WebElement WithdrawButtonNoClickable() throws Exception {
+		w.until(ExpectedConditions.visibilityOf(WithdrawButtonNoClickable));
+		return WithdrawButtonNoClickable;
 	}
 	
 }

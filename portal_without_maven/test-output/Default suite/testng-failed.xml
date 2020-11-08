@@ -3,30 +3,38 @@
 <suite name="Failed suite [Default suite]" guice-stage="DEVELOPMENT">
   <test thread-count="5" name="Default test(failed)">
     <classes>
-      <class name="analyzer.MortgageAnalyzerTestWithCotaker">
+      <class name="analyzer.consumer_credit.Page3Test">
         <methods>
-          <include name="aa_wasCalculationBefore"/>
-          <include name="cd_sourceOfIncome"/>
-          <include name="cb_verifyTooltips"/>
-          <include name="ba_PropertyValue"/>
-          <include name="bd_InstalltmentsValue"/>
-          <include name="ce_MonthIncome2"/>
-          <include name="bb_CreditAmount"/>
-          <include name="bf_verifyTooltips"/>
-          <include name="ab_TypeCredit"/>
-          <include name="be_relationAmountInstallments"/>
-          <include name="cc_creditTaker"/>
-          <include name="cb_backButton"/>
-          <include name="bc_InstalltmentsCount"/>
-          <include name="ca_component"/>
-          <include name="bba_checkboxSelected"/>
-          <include name="aa_Zaloguj"/>
-          <include name="bg_submit"/>
-          <include name="cd_sourceOfIncome2"/>
-          <include name="initialize"/>
-          <include name="cf_legalCharges2"/>
+          <include name="a_initialize"/>
+          <include name="b_backButtonDisplayed"/>
+          <include name="p_legalChargesLessThanMin"/>
+          <include name="u_dependents"/>
+          <include name="k_monthIncomeIsEmpty"/>
+          <include name="t_creditLimitsText"/>
+          <include name="a_component"/>
+          <include name="l_monthIncomeLessThanMin"/>
+          <include name="c_backButton"/>
+          <include name="CLose"/>
+          <include name="o_legalChargesIsEmpty"/>
+          <include name="r_legalChargesMoreThanMax"/>
+          <include name="d_sourceOfIncomeTooltip"/>
+          <include name="e_monthIncomeTooltip"/>
+          <include name="s_payedInstallmentsText"/>
+          <include name="h_householdExpensesTooltip"/>
+          <include name="w_houeseholdExpensesIsEmpty"/>
+          <include name="ab_PreviousSteps"/>
+          <include name="y_householdExpensesLessThanMin"/>
+          <include name="f_legalChargesTooltip"/>
+          <include name="z_householdExpensesMoreThanMax"/>
+          <include name="g_dependentsTooltip"/>
+          <include name="i_sourceOfIncomeIsEmpty"/>
+          <include name="j_sourceOfIncomeIsNotEmpty"/>
+          <include name="za_whyAsk"/>
+          <include name="m_monthIncomeLessThanInstallment"/>
+          <include name="n_monthIncomeMoreThanMax"/>
+          <include name="zb_count"/>
         </methods>
-      </class> <!-- analyzer.MortgageAnalyzerTestWithCotaker -->
+      </class> <!-- analyzer.consumer_credit.Page3Test -->
     </classes>
   </test> <!-- Default test(failed) -->
 </suite> <!-- Failed suite [Default suite] -->

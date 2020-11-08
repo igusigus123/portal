@@ -4,12 +4,17 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.Properties;
 
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class Base {
 	public static WebDriver driver;
+	private WebDriverWait w;
 	public static Properties prop = new Properties();
 	public static Component com;
 	public static String email;
@@ -80,5 +85,16 @@ public class Base {
 
 		return driver;
 	}
+
+	
+	public void clearInput(WebElement input) {
+		int j = input.getAttribute("value").length();
+		for (int i = 0; i < j; i++) {
+			input.sendKeys(Keys.BACK_SPACE);
+		}
+
+	}
+	
+	
 
 }

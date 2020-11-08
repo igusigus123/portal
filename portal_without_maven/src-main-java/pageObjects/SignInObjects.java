@@ -10,12 +10,12 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class SignInObjects {
 	WebDriver driver;
-	WebDriverWait w; // = new WebDriverWait(driver, 30);
+	WebDriverWait w;
 
 	public SignInObjects(WebDriver driver) {
 		this.driver = driver;
 		PageFactory.initElements(driver, this);
-		w = new WebDriverWait(driver, 60);
+		w = new WebDriverWait(driver, 5);
 	}
 
 	// email
@@ -63,26 +63,13 @@ public class SignInObjects {
 		return closeAnotherSessionCheckbox;
 	}
 
-	// check if ImproperValidText is visible
-		public boolean isImproperValidText() throws InterruptedException {
-			try {
-				Thread.sleep(5000);
-				return true;
-			} catch (org.openqa.selenium.NoSuchElementException e) {
-				Thread.sleep(1000);
-				return false;
-			}
-		}
-	// check if closeAnotherSessionCheckbox is disabled
-	public boolean isElementPresent() throws InterruptedException {
-		try {
-			Thread.sleep(5000);
-			driver.findElement(By.xpath("//div[@class='checkbox checkbox-input']//label"));
-			return true;
-		} catch (org.openqa.selenium.NoSuchElementException e) {
-			Thread.sleep(1000);
-			return false;
-		}
+	// ImproperValidText
+	@FindBy(xpath = "//div[@id='bottom-validate-text']/div[2]/div[1]")
+	private WebElement ImproperValidText;
+
+	public WebElement improperValidText() {
+		w.until(ExpectedConditions.visibilityOf(ImproperValidText));
+		return ImproperValidText;
 	}
 
 	// cookiesComunnicateClose
@@ -107,7 +94,7 @@ public class SignInObjects {
 	@FindBy(xpath = "//*[text()='Wybierz']")
 	private WebElement profileSubmit;
 
-	public WebElement ProfileSubmit() {
+	public WebElement ProfileSubmit() throws InterruptedException {
 		w.until(ExpectedConditions.visibilityOf(profileSubmit));
 		return profileSubmit;
 	}
@@ -121,11 +108,19 @@ public class SignInObjects {
 		return klienciIndywid;
 	}
 
+	// FirstActivePeselNumber
+	@FindBy(xpath = "//input[contains(@class,'peselchar-error')]")
+	private WebElement FirstActivePeselNumber;
+
+	public WebElement FirstActivePeselNumber() {
+		w.until(ExpectedConditions.visibilityOf(FirstActivePeselNumber));
+		return FirstActivePeselNumber;
+	}
+
 	public WebElement[] getActivePeselNumbers() {
 		WebElement[] we = new WebElement[11];
 
 		for (int i = 0; i < 11; i++) {
-			// int j = i + 1;
 			String s = driver.findElement(By.xpath("//input[@id='pesel-" + i + "']/parent::div")).getAttribute("class");
 
 			if (s.contains("disabled")) {
